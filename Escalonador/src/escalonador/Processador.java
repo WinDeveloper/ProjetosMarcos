@@ -18,9 +18,7 @@ public class Processador {
             int print=0;
             while(true){
                 System.out.flush();
-                
                 try{
-//                    Thread.sleep(80);
                     if((atual.getTempo()-1)>=0){
                         atual.setTempo(atual.getTempo()-1);
                         print=0;

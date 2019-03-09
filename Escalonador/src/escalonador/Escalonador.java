@@ -39,16 +39,16 @@ public class Escalonador {
     }
     public static void main(String[] args) throws InterruptedException {
         //Criando Lista de Processos A serem escalonados
-//        Processos.add(new Processo(1,20,1));
-//        Processos.add(new Processo(2,5,2));
-//        Processos.add(new Processo(3,20,1));
-//        Processos.add(new Processo(4,7,3));
-//        Processos.add(new Processo(5,10,2));
-//        Processos.add(new Processo(6,9,1));
-//        Processos.add(new Processo(7,11,5));
-//        Processos.add(new Processo(8,18,10));
-//        Processos.add(new Processo(9,18,9));
-//        Processos.add(new Processo(10,18,3));
+            Processos.add(new Processo(1,20,1));
+            Processos.add(new Processo(2,5,2));
+            Processos.add(new Processo(3,20,1));
+            Processos.add(new Processo(4,7,3));
+            Processos.add(new Processo(5,10,2));
+            Processos.add(new Processo(6,9,1));
+            Processos.add(new Processo(7,11,5));
+            Processos.add(new Processo(8,18,10));
+            Processos.add(new Processo(9,18,9));
+            Processos.add(new Processo(10,18,3));
             Processos.add(new Processo(1,20,10));
             Processos.add(new Processo(2,5,20));
             Processos.add(new Processo(3,20,10));
@@ -60,13 +60,13 @@ public class Escalonador {
             Processos.add(new Processo(9,18,90));
             Processos.add(new Processo(10,18,30));
         //---------------------------------------------
-        //Ordenando A lista Baseada em Prioridade
+        //Ordenando A lista Baseada em IDADE/Prioridade/Tempo
         UpdateList();
         P1.Rodar();
         P1.getExe().setPriority(Thread.MIN_PRIORITY);
         while(true){
             if(Processos.getFirst().getTempo()<=1){
-                System.out.println("");
+                System.out.println("--------------------------- Resetando Tempo do:"+Processos.getFirst().getPid());
                 Processos.getFirst().setTempo(Processos.getFirst().getTinicial());
             }
             P1.setAtual(Processos.getFirst());
@@ -83,9 +83,9 @@ public class Escalonador {
             
             Processos.add(aux);
             Processos.removeFirst();
-            for(int i=0;i<Processos.size();i++){
-                System.out.println(Processos.get(i).getPid()+","+Processos.get(i).getIdade()+","+Processos.get(i).getPrioridade()+","+Processos.get(i).getTempo());
-            }            
+//            for(int i=0;i<Processos.size();i++){
+//                System.out.println(Processos.get(i).getPid()+","+Processos.get(i).getIdade()+","+Processos.get(i).getPrioridade()+","+Processos.get(i).getTempo());
+//            }            
             UpdateList();
 
         }
