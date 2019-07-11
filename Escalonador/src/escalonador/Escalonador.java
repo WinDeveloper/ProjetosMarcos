@@ -15,6 +15,7 @@ import java.util.Comparator;
 public class Escalonador {
    static Processador P1=new Processador();
    static LinkedList<Processo> Processos=new LinkedList<>();
+   static LinkedList<Processo> Terminados=new LinkedList<>();
    //---------------------------------------------------------------------------
    static void UpdateList(){
         Collections.sort(Processos, new Comparator<Processo>() {
@@ -48,48 +49,46 @@ public class Escalonador {
             Processos.add(new Processo(7,11,5));
             Processos.add(new Processo(8,18,10));
             Processos.add(new Processo(9,18,9));
-            Processos.add(new Processo(10,18,3));
-            Processos.add(new Processo(1,20,10));
-            Processos.add(new Processo(2,5,20));
-            Processos.add(new Processo(3,20,10));
-            Processos.add(new Processo(4,7,30));
-            Processos.add(new Processo(5,10,20));
-            Processos.add(new Processo(6,9,1));
-            Processos.add(new Processo(7,11,50));
-            Processos.add(new Processo(8,18,10));
-            Processos.add(new Processo(9,18,90));
-            Processos.add(new Processo(10,18,30));
+            Processos.add(new Processo(14, 100000, 90));
+            Processos.add(new Processo(10,1800000,3));
         //---------------------------------------------
-        //Ordenando A lista Baseada em IDADE/Prioridade/Tempo
+        //Ordenando A lista Baseada em Prioridade
         UpdateList();
         P1.Rodar();
         P1.getExe().setPriority(Thread.MIN_PRIORITY);
         while(true){
             if(Processos.getFirst().getTempo()<=1){
-                System.out.println("--------------------------- Resetando Tempo do:"+Processos.getFirst().getPid());
-                Processos.getFirst().setTempo(Processos.getFirst().getTinicial());
+                //System.out.println("----------------------------");
+//                Processos.getFirst().setTempo(Processos.getFirst().getTinicial());
+//                Terminados.add(Processos.getFirst());
+                Processos.removeFirst();
+                if(Processos.isEmpty())
+                    break;
             }
+            
             P1.setAtual(Processos.getFirst());
-            System.out.println("Rodando PID:"+Processos.getFirst().getPid()+" Tempo Disponivel:"+Processos.getFirst().getTempo());
+            //System.out.println("Rodando PID:"+Processos.getFirst().getPid()+" Tempo Disponivel:"+Processos.getFirst().getTempo());
             Processo aux=Processos.getFirst();
             Processos.getFirst().setIdade(0);
             for(int i =1;i<Processos.size();i++){
                 Processos.get(i).setIdade(Processos.get(i).getIdade()+1);
             }
-            
+//            System.out.println("------------------");
+//            for(int i=0;i<Processos.size();i++){
+//                System.out.println(Processos.get(i).getPid()+","+Processos.get(i).getIdade()+","+Processos.get(i).getPrioridade()+","+Processos.get(i).getTempo());
+//            }
 //            if(Processos.get(2).getTempo()<=1){
 //                Processos.get(2).setTempo(Processos.get(2).getTinicial());
 //            }
             
             Processos.add(aux);
             Processos.removeFirst();
-//            for(int i=0;i<Processos.size();i++){
-//                System.out.println(Processos.get(i).getPid()+","+Processos.get(i).getIdade()+","+Processos.get(i).getPrioridade()+","+Processos.get(i).getTempo());
-//            }            
+// imprime os Processos terminados
+            for(int i=0;i<Terminados.size();i++){
+                System.out.println(Terminados.get(i).getPid()+","+Terminados.get(i).getIdade()+","+Terminados.get(i).getPrioridade()+","+Terminados.get(i).getTempo());
+            }            
             UpdateList();
-
         }
+        P1.Parar();
     }
-    
-    
 }

@@ -16,6 +16,7 @@ public class Processo {
     private int idade=0;
     private int Tinicial;
 
+ 
     public int getPid() {
         return pid;
     }
