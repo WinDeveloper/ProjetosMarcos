@@ -43,8 +43,6 @@ function TecladoEvento(event){
     ela é passada diretamente pela variavel event
 */
 function Imageclicada(event){
-    /* Coloquei so para esconder o body OBS: Não precisa esconder*/
-    body.classList.add('esconder')
     /* Pegando Id da imagem atual para poder selecionar as demais*/
     imagemAtual = parseInt(event.target.dataset.index)
     /*Mostrando o visor*/
